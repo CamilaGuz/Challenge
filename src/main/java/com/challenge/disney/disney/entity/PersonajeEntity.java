@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table (name = "Personaje")
 @Getter
 @Setter
-public class Personaje {
+public class PersonajeEntity {
 
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
@@ -25,6 +27,12 @@ public class Personaje {
 
     private String historia;
 
+    @ManyToMany(
+            mappedBy = "personaje",
+            cascade = CascadeType.ALL,
+            fetch  = FetchType.LAZY
+    )
+    private List<PeliculaEntity> peliculas = new ArrayList<>();
 
 
 }
