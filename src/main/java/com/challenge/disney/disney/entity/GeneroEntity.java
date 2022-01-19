@@ -1,6 +1,7 @@
 package com.challenge.disney.disney.entity;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Genero")
+@Table(name = "genero")
 @Getter
 @Setter
+
 public class GeneroEntity {
 
     @Id
@@ -22,12 +24,7 @@ public class GeneroEntity {
 
     private String imagen;
 
-    @ManyToMany(
-            mappedBy = "genero",
-            cascade = CascadeType.ALL,
-            fetch  = FetchType.LAZY
-    )
-    private List<PeliculaEntity> pelicula = new ArrayList<>();
+
 
 }
 
