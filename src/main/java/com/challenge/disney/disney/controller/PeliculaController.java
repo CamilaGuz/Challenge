@@ -1,6 +1,8 @@
 package com.challenge.disney.disney.controller;
 
+import com.challenge.disney.disney.dto.PeliculaBasicDTO;
 import com.challenge.disney.disney.dto.PeliculaDTO;
+import com.challenge.disney.disney.dto.PersonajeBasicDTO;
 import com.challenge.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -44,11 +46,19 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    /* @PutMapping("/{id}")
+     @PutMapping("/{id}")
         public ResponseEntity<PeliculaDTO>put(@PathVariable Long id, @RequestBody PeliculaDTO edit){
             PeliculaDTO putPelicula = peliculaService.putPelicula(id,edit);
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(putPelicula);
-        }*/
+        }
+
+    @GetMapping("/movies")
+    public  ResponseEntity<List<PeliculaBasicDTO>> getAllBasic(){
+
+        List<PeliculaBasicDTO> peliculasBasicas = peliculaService.getAllBasics();
+
+        return ResponseEntity.status(HttpStatus.OK).body(peliculasBasicas);
+    }
 
 }

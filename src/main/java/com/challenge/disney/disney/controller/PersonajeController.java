@@ -1,5 +1,6 @@
 package com.challenge.disney.disney.controller;
 
+import com.challenge.disney.disney.dto.PersonajeBasicDTO;
 import com.challenge.disney.disney.dto.PersonajeDTO;
 import com.challenge.disney.disney.service.PersonajeService;
 import com.challenge.disney.disney.service.impl.PersonajeServiceImpl;
@@ -22,6 +23,15 @@ public class PersonajeController {
         this.personajeService = personajeService;
     }
 
+    @GetMapping("/characters")
+    public  ResponseEntity<List<PersonajeBasicDTO>> getAllBasic(){
+
+        List<PersonajeBasicDTO> personajesBasicos = personajeService.getAllBasics();
+
+        return ResponseEntity.status(HttpStatus.OK).body(personajesBasicos);
+    }
+
+
     @PostMapping
         public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje){
 
@@ -38,6 +48,14 @@ public class PersonajeController {
 
             return ResponseEntity.status(HttpStatus.OK).body(personaje);
         }
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> detallesDePersonaje(@PathVariable Long id){
+
+        PersonajeDTO personajeDTO = personajeService.getDetalles(id);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(personajeDTO);
+
+    }
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Void>delete(@PathVariable Long id){
@@ -51,6 +69,8 @@ public class PersonajeController {
 
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(putPersonaje);
         }
+
+
 
 
 

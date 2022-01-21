@@ -1,11 +1,13 @@
 package com.challenge.disney.disney.service.impl;
 
+import com.challenge.disney.disney.dto.PersonajeBasicDTO;
 import com.challenge.disney.disney.dto.PersonajeDTO;
 import com.challenge.disney.disney.entity.PersonajeEntity;
 import com.challenge.disney.disney.mapper.PersonajeMapper;
 import com.challenge.disney.disney.repository.PersonajeRepository;
 import com.challenge.disney.disney.service.PersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +16,15 @@ import java.util.Optional;
 @Service
 public class PersonajeServiceImpl implements PersonajeService {
 
-    @Autowired
+
     private PersonajeMapper personajeMapper;
-    @Autowired
+
     private PersonajeRepository personajeRepository;
 
+    public PersonajeServiceImpl(@Autowired@Lazy PersonajeMapper personajeMapper, PersonajeRepository personajeRepository) {
+        this.personajeMapper = personajeMapper;
+        this.personajeRepository = personajeRepository;
+    }
 
     public PersonajeDTO save(PersonajeDTO dto){
         PersonajeEntity personajeEntity = personajeMapper.personajeDTO2Entity(dto);
@@ -38,13 +44,14 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     public void delete(Long id){
+
         personajeRepository.deleteById(id);
     }
 
     @Override
     public PersonajeDTO putPersonaje(Long id, PersonajeDTO edit) {
 
-        PersonajeEntity savedPersonaje = thisPersonajeEdit(id);
+        PersonajeEntity savedPersonaje = this.personajeEdit(id);
         savedPersonaje.setPeso(edit.getPeso());
         savedPersonaje.setNombre(edit.getNombre());
         savedPersonaje.setImagen(edit.getImagen());
@@ -56,13 +63,33 @@ public class PersonajeServiceImpl implements PersonajeService {
         PersonajeDTO savedDTO = personajeMapper.personajeEntity2DTO(putPersonaje, false);
         return savedDTO;
     }
+    //basicdto
 
-    private PersonajeEntity thisPersonajeEdit(Long id) {
+    @Override
+    public List<PersonajeBasicDTO> getAllBasics() {
+
+        List<PersonajeEntity> entityList = personajeRepository.findAll();
+        List<PersonajeBasicDTO> resultado = personajeMapper.personajeEntityList2DTOListBasic(entityList);
+
+
+        return resultado;
+    }
+
+
+    private PersonajeEntity personajeEdit(Long id) {
         Optional<PersonajeEntity> personajeEntity = personajeRepository.findById(id);
         if (!personajeEntity.isPresent()){
 
         }
         return personajeEntity.get();
+    }
+
+    @Override
+    public PersonajeDTO getDetalles(Long id) {
+
+        PersonajeEntity personajeEncontado = personajeRepository.getById(id);
+        PersonajeDTO resultado = personajeMapper.personajeEntity2DTO(personajeEncontado, true);
+        return resultado;
     }
 
 

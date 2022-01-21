@@ -4,7 +4,7 @@ package com.challenge.disney.disney.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.persistence.Column;
 import java.util.List;
 
 @Getter
@@ -22,4 +22,7 @@ public class PeliculaDTO {
     private int calificacion;
 
     private List<PersonajeDTO> peliculaPersonaje;
+
+    @Column(name = "genero_id")
+    private Long generoId;
 }

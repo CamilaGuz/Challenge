@@ -13,7 +13,6 @@ import java.util.List;
 @Table(name = "genero")
 @Getter
 @Setter
-
 public class GeneroEntity {
 
     @Id

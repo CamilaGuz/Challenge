@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @SQLDelete( sql = "UPDATE  personaje SET deleted = true WHERE id=?")
 @Where( clause = "deleted=false")
-
 public class PersonajeEntity {
 
     @Id

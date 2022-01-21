@@ -1,15 +1,19 @@
 package com.challenge.disney.disney.dto;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PersonajeBasicDTO {
+public class PeliculaBasicDTO {
 
 
     private String imagen;
-    private String nombre;
+
+    private String titulo;
+
+    private String fechaCreacion;
+
+
 
 }

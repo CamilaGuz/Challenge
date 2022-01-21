@@ -1,8 +1,10 @@
 package com.challenge.disney.disney.mapper;
 
+import com.challenge.disney.disney.dto.PersonajeBasicDTO;
 import com.challenge.disney.disney.dto.PersonajeDTO;
 import com.challenge.disney.disney.entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,9 +13,12 @@ import java.util.List;
 @Component
 public class PersonajeMapper {
 
-    @Autowired
+
     private PeliculaMapper peliculaMapper;
 
+    public PersonajeMapper(@Autowired @Lazy PeliculaMapper peliculaMapper) {
+        this.peliculaMapper = peliculaMapper;
+    }
 
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto){
 
@@ -58,16 +63,40 @@ public class PersonajeMapper {
         }
         return dtoList;
     }
+    //personajeBAsic
+    public List<PersonajeBasicDTO> personajeEntityList2DTOListBasic(List<PersonajeEntity> entityList) {
 
-   /* public void personajeEntityRefreshValues(PersonajeEntity entity, PersonajeDTO personajeDTO){
+        List<PersonajeBasicDTO>dtoLista = new ArrayList<>();
+        for(PersonajeEntity aux : entityList){
+            dtoLista.add(this.personajeEntity2DtoBasic(aux));
+        }
+        return dtoLista;
 
-        entity.setImagen(personajeDTO.getImagen());
-        entity.setNombre(personajeDTO.getNombre());
-        entity.setPeso(personajeDTO.getPeso());
-        entity.getHistoria(personajeDTO.getHistoria());
+    }
 
-    }*/
+    private PersonajeBasicDTO personajeEntity2DtoBasic(PersonajeEntity aux) {
+
+        PersonajeBasicDTO personajeBasicDTO = new PersonajeBasicDTO();
+
+        personajeBasicDTO.setImagen(aux.getImagen());
+        personajeBasicDTO.setNombre(aux.getNombre());
+        personajeBasicDTO.setNombre(aux.getNombre());
+
+        return  personajeBasicDTO;
+    }
+
+
+    public List<PersonajeEntity> perosonajeEntityList(List<PersonajeDTO> peliculaPersonaje) {
+
+        List<PersonajeEntity>personajeEntityLista = new ArrayList<>();
+
+        for(PersonajeDTO aux: peliculaPersonaje){
+            personajeEntityLista.add(this.personajeDTO2Entity(aux));
+        }
+
+        return personajeEntityLista;
 
 
 
+    }
 }

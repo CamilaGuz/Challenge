@@ -38,18 +38,6 @@ public class PeliculaEntity {
 
 
 
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "genero_id", insertable = false, updatable = false)
-    private GeneroEntity genero;
-
-    @Column(name = "genero_id", nullable = false)
-    private Long generoId;
-
-    private List<GeneroEntity> generos = new ArrayList<>();
-
-
-
     @ManyToMany(
             cascade = {
                     CascadeType.PERSIST,
@@ -66,14 +54,12 @@ public class PeliculaEntity {
 
 
 
-    /*@JoinTable(
-            name = "pelicula_genero",
-            joinColumns = @JoinColumn(name = "pelicula_id"),
-            inverseJoinColumns = @JoinColumn(name = "genero_id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "genero_id", insertable = false, updatable = false)
+    private GeneroEntity genero;
 
-    )*/
-
-
+   // @Column(name = "genero_id", nullable = false)
+   //  private Long generoId;
 
 
 

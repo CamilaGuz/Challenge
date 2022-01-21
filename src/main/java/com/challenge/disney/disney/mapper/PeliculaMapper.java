@@ -1,7 +1,12 @@
 package com.challenge.disney.disney.mapper;
 
+import com.challenge.disney.disney.dto.PeliculaBasicDTO;
 import com.challenge.disney.disney.dto.PeliculaDTO;
+import com.challenge.disney.disney.dto.PersonajeBasicDTO;
+import com.challenge.disney.disney.dto.PersonajeDTO;
+import com.challenge.disney.disney.entity.GeneroEntity;
 import com.challenge.disney.disney.entity.PeliculaEntity;
+import com.challenge.disney.disney.entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -20,7 +25,7 @@ public class PeliculaMapper {
         this.personajeMapper = personajeMapper;
     }
 
-    public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto) {
+    public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto, GeneroEntity generoEntity) {
 
         PeliculaEntity peliculaEntity = new PeliculaEntity();
 
@@ -29,6 +34,8 @@ public class PeliculaMapper {
         peliculaEntity.setFechaCreacion(this.String2LocalDate(dto.getFechaCreacion()));
         peliculaEntity.setImagen(dto.getImagen());
         peliculaEntity.setCalificacion(dto.getCalificacion());
+        peliculaEntity.setPersonajes(personajeMapper.perosonajeEntityList(dto.getPeliculaPersonaje()));
+        peliculaEntity.setGenero(generoEntity);
 
 
         return peliculaEntity;
@@ -44,10 +51,13 @@ public class PeliculaMapper {
         dto.setFechaCreacion(entity.getFechaCreacion().toString());
         dto.setImagen(entity.getImagen());
         dto.setCalificacion(entity.getCalificacion());
+        dto.setPeliculaPersonaje(personajeMapper.personajeEntityList2DTOList(entity.getPersonajes(), false));
 
-        if (mostrarPersonajes){
-             dto.setPeliculaPersonaje(personajeMapper.personajeEntityList2DTOList(entity.getPersonajes(),false));
-        }
+       /* if (mostrarPersonajes){
+            List<PersonajeDTO> personajeDTOS = this.personajeMapper.personajeEntityList2DTOList(entity.getPersonajes(),false);
+            dto.setPeliculaPersonaje(personajeDTOS);
+             //dto.setPeliculaPersonaje(personajeMapper.personajeEntityList2DTOList(entity.getPersonajes(),false));
+        }*/
 
         return dto;
     }
@@ -67,6 +77,28 @@ public class PeliculaMapper {
         return date;
     }
 
+
+    public List<PeliculaBasicDTO> peliculaBasicEntityList2DtoList(List<PeliculaEntity> peliculaEntities) {
+
+        List<PeliculaBasicDTO>dtoLista = new ArrayList<>();
+        for(PeliculaEntity aux : peliculaEntities){
+            dtoLista.add(this.peliculaBasicEntity2Dto(aux));
+        }
+        return dtoLista;
+
+
+    }
+
+    private PeliculaBasicDTO peliculaBasicEntity2Dto(PeliculaEntity aux) {
+
+        PeliculaBasicDTO peliculaBasicDTO = new PeliculaBasicDTO();
+
+        peliculaBasicDTO.setImagen(aux.getImagen());
+        peliculaBasicDTO.setTitulo(aux.getTitulo());
+        peliculaBasicDTO.setFechaCreacion(aux.getFechaCreacion().toString());
+
+        return peliculaBasicDTO;
+    }
 
 }
 
