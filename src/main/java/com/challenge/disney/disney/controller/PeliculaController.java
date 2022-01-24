@@ -11,11 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("peliculas")
+@RequestMapping("movies")
 public class PeliculaController {
-
 
 
     private PeliculaService peliculaService;
@@ -24,41 +24,68 @@ public class PeliculaController {
         this.peliculaService = peliculaService;
     }
 
+    //Post para pelicula
+
     @PostMapping
-    public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO pelicula){
+    public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO movie){
 
-        PeliculaDTO peliculaGuardada = peliculaService.save(pelicula);
+        PeliculaDTO savedMovie= peliculaService.save(movie);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(peliculaGuardada);
+    return ResponseEntity.status(HttpStatus.CREATED).body(savedMovie);
     }
 
-    @GetMapping
+    //Get para todas las peliculas
+
+    @GetMapping("/All")
     public  ResponseEntity<List<PeliculaDTO>> getAll(){
 
-        List<PeliculaDTO> peliculas = peliculaService.getAllPelicula();
+        List<PeliculaDTO> movies = peliculaService.getAllMovies();
 
-        return ResponseEntity.status(HttpStatus.OK).body(peliculas);
+        return ResponseEntity.status(HttpStatus.OK).body(movies);
         }
+
+    // Get de atributos basicos de pelicula
+
+    @GetMapping("/movies")
+    public  ResponseEntity<List<PeliculaBasicDTO>> getAllBasic(){
+
+        List<PeliculaBasicDTO> basicMovies = peliculaService.getAllBasics();
+
+        return ResponseEntity.status(HttpStatus.OK).body(basicMovies);
+    }
+
+    //Get para busqueda con filtros
+
+    @GetMapping
+    public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Set<Long> genres,
+            @RequestParam(required = false, defaultValue = "ASC") String order)
+
+    { List<PeliculaDTO> movies = this.peliculaService.getByFilters(title, genres,order);
+
+        return ResponseEntity.ok(movies);
+
+    }
+
+
+
+    // Borrar pelicula
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>delete(@PathVariable Long id){
         this.peliculaService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    // Put pelicula
 
      @PutMapping("/{id}")
         public ResponseEntity<PeliculaDTO>put(@PathVariable Long id, @RequestBody PeliculaDTO edit){
-            PeliculaDTO putPelicula = peliculaService.putPelicula(id,edit);
+            PeliculaDTO putMovie = peliculaService.putMovie(id,edit);
 
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(putPelicula);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(putMovie);
         }
 
-    @GetMapping("/movies")
-    public  ResponseEntity<List<PeliculaBasicDTO>> getAllBasic(){
 
-        List<PeliculaBasicDTO> peliculasBasicas = peliculaService.getAllBasics();
-
-        return ResponseEntity.status(HttpStatus.OK).body(peliculasBasicas);
-    }
 
 }

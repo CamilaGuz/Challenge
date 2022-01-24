@@ -13,16 +13,16 @@ public class PeliculaDTO {
 
     private Long id;
 
-    private String imagen;
+    private String image;
 
-    private String titulo;
+    private String title;
 
-    private String fechaCreacion;
+    private String dateCreation;
 
-    private int calificacion;
+    private int qualification;
 
-    private List<PersonajeDTO> peliculaPersonaje;
+    private List<PersonajeDTO> movieCharacters;
 
-    @Column(name = "genero_id")
-    private Long generoId;
+    @Column(name = "gender_id")
+    private Long genderId;
 }

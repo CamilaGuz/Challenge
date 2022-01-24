@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "personaje")
+@Table (name = "characters")
 @Getter
 @Setter
-@SQLDelete( sql = "UPDATE  personaje SET deleted = true WHERE id=?")
+@SQLDelete( sql = "UPDATE  characters SET deleted = true WHERE id=?")
 @Where( clause = "deleted=false")
 public class PersonajeEntity {
 
@@ -24,18 +24,18 @@ public class PersonajeEntity {
 
     private boolean deleted = Boolean.FALSE;
 
-    private String imagen;
+    private String image;
 
-    private String nombre;
+    private String name;
 
-    private int edad;
+    private Integer age;
 
-    private double peso;
+    private double weight;
 
-    private String historia;
+    private String history;
 
-    @ManyToMany(mappedBy = "personajes", cascade = CascadeType.ALL, fetch  = FetchType.LAZY)
-    private List<PeliculaEntity> peliculas = new ArrayList<>();
+    @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL, fetch  = FetchType.LAZY)
+    private List<PeliculaEntity> movies = new ArrayList<>();
 
 
 }

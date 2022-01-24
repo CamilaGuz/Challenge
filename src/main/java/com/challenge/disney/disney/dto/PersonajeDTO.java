@@ -9,12 +9,12 @@ import java.util.List;
 @Setter
 public class PersonajeDTO {
     private Long id;
-    private String imagen;
-    private String nombre;
-    private int edad;
-    private double peso;
-    private String historia;
-    private List<PeliculaDTO> personajePelicula;
+    private String image;
+    private String name;
+    private Integer age;
+    private double weight;
+    private String history;
+    private List<PeliculaDTO> characterMovies;
 
 
 

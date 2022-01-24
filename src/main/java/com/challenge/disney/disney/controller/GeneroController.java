@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("generos")
+@RequestMapping("genders")
 public class GeneroController {
 
 
@@ -25,10 +25,14 @@ public class GeneroController {
     }
 
     @PostMapping
-    public ResponseEntity<GeneroDTO> save(@RequestBody GeneroDTO genero){
+    public ResponseEntity<GeneroDTO> save(@RequestBody GeneroDTO gender){
 
-        GeneroDTO generoGuardado = generoService.save(genero);
+        GeneroDTO savedGender = generoService.save(gender);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(generoGuardado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedGender);
     }
+
+
+
+
 }

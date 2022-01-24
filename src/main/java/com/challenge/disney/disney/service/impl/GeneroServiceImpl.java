@@ -24,11 +24,11 @@ public class GeneroServiceImpl implements GeneroService {
     }
 
     @Override
-    public GeneroDTO save(GeneroDTO genero) {
+    public GeneroDTO save(GeneroDTO gender) {
 
-        GeneroEntity generoEntity = generoMapper.generoDTO2Entity(genero);
-        GeneroEntity generoSaved = generoRepository.save(generoEntity);
-        GeneroDTO resultado = generoMapper.generoEntity2DTO(generoSaved);
+        GeneroEntity generoEntity = generoMapper.generoDTO2Entity(gender);
+        GeneroEntity savedGender = generoRepository.save(generoEntity);
+        GeneroDTO resultado = generoMapper.generoEntity2DTO(savedGender);
 
         return resultado;
     }

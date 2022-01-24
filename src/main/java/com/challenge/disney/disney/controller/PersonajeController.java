@@ -11,9 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("personajes")
+@RequestMapping("characters")
 public class PersonajeController {
 
 
@@ -23,52 +24,80 @@ public class PersonajeController {
         this.personajeService = personajeService;
     }
 
+    //Get para personajes basicos
+
+
     @GetMapping("/characters")
-    public  ResponseEntity<List<PersonajeBasicDTO>> getAllBasic(){
+    public ResponseEntity<List<PersonajeBasicDTO>> getAllBasic() {
 
-        List<PersonajeBasicDTO> personajesBasicos = personajeService.getAllBasics();
+        List<PersonajeBasicDTO> basicsCharacters = personajeService.getAllBasics();
 
-        return ResponseEntity.status(HttpStatus.OK).body(personajesBasicos);
+        return ResponseEntity.status(HttpStatus.OK).body(basicsCharacters);
     }
 
+    //Get para personajes con filtro
 
-    @PostMapping
-        public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO personaje){
+    @GetMapping
+    public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters (
+      @RequestParam(required = false) String name,
+      @RequestParam(required = false) Integer age,
+      @RequestParam(required = false) Set<Long> IdMovie)
+    {
+       List<PersonajeDTO> characters = this.personajeService.getByFilters(name, age, IdMovie);
 
-            PersonajeDTO personajeGuardado = personajeService.save(personaje);
+       return ResponseEntity.ok(characters);
+    }
 
+    //Get para todos los personajes
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(personajeGuardado);
-        }
+    @GetMapping("/all")
+    public ResponseEntity<List<PersonajeDTO>> getAll() {
 
-        @GetMapping
-        public  ResponseEntity<List<PersonajeDTO>> getAll(){
+        List<PersonajeDTO> characters = personajeService.getAllCharacters();
 
-            List<PersonajeDTO> personaje = personajeService.getAllPersonajes();
+        return ResponseEntity.status(HttpStatus.OK).body(characters);
+    }
 
-            return ResponseEntity.status(HttpStatus.OK).body(personaje);
-        }
+    //Get para personajes por id
+
     @GetMapping("/{id}")
-    public ResponseEntity<PersonajeDTO> detallesDePersonaje(@PathVariable Long id){
+    public ResponseEntity<PersonajeDTO> charactersDetails(@PathVariable Long id) {
 
-        PersonajeDTO personajeDTO = personajeService.getDetalles(id);
+        PersonajeDTO personajeDTO = personajeService.getDetails(id);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(personajeDTO);
 
     }
 
-        @DeleteMapping("/{id}")
-        public ResponseEntity<Void>delete(@PathVariable Long id){
-            this.personajeService.delete(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<PersonajeDTO>put(@PathVariable Long id, @RequestBody PersonajeDTO edit){
-            PersonajeDTO putPersonaje = personajeService.putPersonaje(id,edit);
+    //Post para pesonajes
 
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(putPersonaje);
-        }
+    @PostMapping
+    public ResponseEntity<PersonajeDTO> save(@RequestBody PersonajeDTO character) {
+
+        PersonajeDTO savedCharacter = personajeService.save(character);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCharacter);
+    }
+
+
+    //delete por id para personajes
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        this.personajeService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    //Put por id para pesonajes
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonajeDTO> put(@PathVariable Long id, @RequestBody PersonajeDTO edit) {
+        PersonajeDTO putCharacter = personajeService.putCharacter(id, edit);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(putCharacter);
+    }
 
 
 

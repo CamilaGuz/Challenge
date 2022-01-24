@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "genero")
+@Table(name = "gender")
 @Getter
 @Setter
 public class GeneroEntity {
@@ -19,9 +19,11 @@ public class GeneroEntity {
     @GeneratedValue( strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String nombre;
+    private String name;
 
-    private String imagen;
+    private String image;
+
+    //private List<PeliculaEntity> genders = new ArrayList<>();
 
 
 

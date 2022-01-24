@@ -9,7 +9,7 @@ import lombok.Setter;
 public class PersonajeBasicDTO {
 
 
-    private String imagen;
-    private String nombre;
+    private String image;
+    private String name;
 
 }

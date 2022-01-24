@@ -8,11 +8,11 @@ import lombok.Setter;
 public class PeliculaBasicDTO {
 
 
-    private String imagen;
+    private String image;
 
-    private String titulo;
+    private String title;
 
-    private String fechaCreacion;
+    private String dateCreation;
 
 
 

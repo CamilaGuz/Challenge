@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "pelicula")
+@Table (name = "movie")
 @Getter
 @Setter
-@SQLDelete( sql = "UPDATE  personaje SET deleted = true WHERE id=?")
+@SQLDelete( sql = "UPDATE  movies SET deleted = true WHERE id=?")
 @Where( clause = "deleted=false")
 public class PeliculaEntity {
 
@@ -24,15 +24,15 @@ public class PeliculaEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String imagen;
+    private String image;
 
-    private String titulo;
+    private String title;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "creation_date")
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDate fechaCreacion;
+    private LocalDate dateCreation;
 
-    private int calificacion;
+    private int qualification;
 
     private boolean deleted = Boolean.FALSE;
 
@@ -45,21 +45,20 @@ public class PeliculaEntity {
             },
             fetch = FetchType.LAZY
     )@JoinTable(
-            name = "pelicula_personaje",
-            joinColumns = @JoinColumn(name = "pelicula_id"),
-            inverseJoinColumns = @JoinColumn(name = "personaje_id")
+            name = "movie_character",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "character_id")
 
     )
-    private List<PersonajeEntity> personajes = new ArrayList<>();
+    private List<PersonajeEntity> characters = new ArrayList<>();
 
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "genero_id", insertable = false, updatable = false)
-    private GeneroEntity genero;
+    private GeneroEntity gender;
 
-   // @Column(name = "genero_id", nullable = false)
-   //  private Long generoId;
+
+
 
 
 

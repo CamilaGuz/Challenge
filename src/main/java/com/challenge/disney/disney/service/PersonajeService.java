@@ -4,18 +4,21 @@ import com.challenge.disney.disney.dto.PersonajeBasicDTO;
 import com.challenge.disney.disney.dto.PersonajeDTO;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PersonajeService {
 
     PersonajeDTO save(PersonajeDTO dto);
 
-    List<PersonajeDTO> getAllPersonajes();
+    List<PersonajeDTO> getAllCharacters();
 
     void delete(Long id);
 
-    PersonajeDTO putPersonaje(Long id, PersonajeDTO edit);
+    PersonajeDTO putCharacter(Long id, PersonajeDTO edit);
 
     List<PersonajeBasicDTO> getAllBasics();
 
-    PersonajeDTO getDetalles(Long id);
+    PersonajeDTO getDetails(Long id);
+
+    List<PersonajeDTO> getByFilters(String name, Integer age, Set<Long> idMovie);
 }

@@ -20,40 +20,42 @@ public class PersonajeMapper {
         this.peliculaMapper = peliculaMapper;
     }
 
+    //dto a entity
+
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto){
 
         PersonajeEntity personajeEntity = new PersonajeEntity();
 
-        personajeEntity.setEdad(dto.getEdad());
-        personajeEntity.setHistoria(dto.getHistoria());
-        personajeEntity.setImagen(dto.getImagen());
-        personajeEntity.setNombre(dto.getNombre());
-        personajeEntity.setPeso(dto.getPeso());
+        personajeEntity.setAge(dto.getAge());
+        personajeEntity.setHistory(dto.getHistory());
+        personajeEntity.setImage(dto.getImage());
+        personajeEntity.setName(dto.getName());
+        personajeEntity.setWeight(dto.getWeight());
 
         return personajeEntity;
     }
 
+    //entity a dto
 
     public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity, boolean b) {
 
         PersonajeDTO dto = new PersonajeDTO();
 
         dto.setId(entity.getId());
-        dto.setEdad(entity.getEdad());
-        dto.setHistoria(entity.getHistoria());
-        dto.setImagen(entity.getImagen());
-        dto.setNombre(entity.getNombre());
-        dto.setPeso(entity.getPeso());
+        dto.setAge(entity.getAge());
+        dto.setHistory(entity.getHistory());
+        dto.setImage(entity.getImage());
+        dto.setName(entity.getName());
+        dto.setWeight(entity.getWeight());
 
         if (b){
-
-            dto.setPersonajePelicula(peliculaMapper.peliculaEntityList2DtoList(entity.getPeliculas(), false));
-
+            dto.setCharacterMovies(peliculaMapper.peliculaEntityList2DtoList(entity.getMovies(), false));
         }
-
 
         return dto;
     }
+
+    //guardar en lista dto
 
     public List<PersonajeDTO>personajeEntityList2DTOList(List<PersonajeEntity> listaEntity, boolean b) {
         List<PersonajeDTO> dtoList = new ArrayList<>();
@@ -63,7 +65,9 @@ public class PersonajeMapper {
         }
         return dtoList;
     }
-    //personajeBAsic
+
+    //trabajamos con la lista de personajes basic
+
     public List<PersonajeBasicDTO> personajeEntityList2DTOListBasic(List<PersonajeEntity> entityList) {
 
         List<PersonajeBasicDTO>dtoLista = new ArrayList<>();
@@ -78,9 +82,9 @@ public class PersonajeMapper {
 
         PersonajeBasicDTO personajeBasicDTO = new PersonajeBasicDTO();
 
-        personajeBasicDTO.setImagen(aux.getImagen());
-        personajeBasicDTO.setNombre(aux.getNombre());
-        personajeBasicDTO.setNombre(aux.getNombre());
+        personajeBasicDTO.setImage(aux.getImage());
+        personajeBasicDTO.setName(aux.getName());
+
 
         return  personajeBasicDTO;
     }

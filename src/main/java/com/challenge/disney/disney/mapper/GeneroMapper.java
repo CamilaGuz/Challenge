@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component;
 public class GeneroMapper {
 
 
-    public GeneroEntity generoDTO2Entity(GeneroDTO genero) {
+    public GeneroEntity generoDTO2Entity(GeneroDTO gender) {
 
         GeneroEntity generoEntity = new GeneroEntity();
 
-        generoEntity.setImagen(genero.getImagen());
-        generoEntity.setNombre(genero.getNombre());
+        generoEntity.setImage(gender.getImage());
+        generoEntity.setName(gender.getName());
+
 
 
         return generoEntity;
@@ -23,8 +24,8 @@ public class GeneroMapper {
 
         GeneroDTO generoDTO = new GeneroDTO();
 
-        generoDTO.setImagen(entity.getImagen());
-        generoDTO.setNombre(entity.getNombre());
+        generoDTO.setImage(entity.getImage());
+        generoDTO.setName(entity.getName());
         generoDTO.setId(entity.getId());
 
         return generoDTO;
