@@ -54,7 +54,6 @@ public class PeliculaServiceImpl implements PeliculaService {
     //delete
     @Override
     public void delete(Long id) {
-
         peliculaRepository.deleteById(id);
     }
     //Put
@@ -76,7 +75,6 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 
     private PeliculaEntity getpeliculaById(Long id) {
-
         Optional<PeliculaEntity> peliculaEntity = peliculaRepository.findById(id);
         if (!peliculaEntity.isPresent()){
         }
@@ -89,10 +87,10 @@ public class PeliculaServiceImpl implements PeliculaService {
 
         PeliculaFiltersDTO filtersDTO = new PeliculaFiltersDTO(title, image, dateCreation, gender, order);
 
-        List<PeliculaEntity> entities = this.peliculaRepository.findAll(this.peliculaSpecification.getByFilters(filtersDTO));
-        List<PeliculaDTO> dtos = this.peliculaMapper.peliculaEntityList2DtoList(entities, true);
+        List<PeliculaEntity> entities = peliculaRepository.findAll(peliculaSpecification.getByFilters(filtersDTO));
+        List<PeliculaDTO> resultado = peliculaMapper.peliculaEntityList2DtoList(entities, true);
 
-        return dtos;
+        return resultado;
     }
 
     @Override

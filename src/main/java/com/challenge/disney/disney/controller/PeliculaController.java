@@ -23,7 +23,6 @@ public class PeliculaController {
         this.peliculaService = peliculaService;
     }
 
-
     @PostMapping
     public ResponseEntity<PeliculaDTO> save(@RequestBody PeliculaDTO movie){
 
@@ -50,12 +49,9 @@ public class PeliculaController {
     //Get para traer una LISTA de imagen, titulo y fecha de creacion
     @GetMapping("/movies")
     public  ResponseEntity<List<PeliculaBasicDTO>> getAllBasic(){
-
         List<PeliculaBasicDTO> basicMovies = peliculaService.getAllBasics();
-
         return ResponseEntity.status(HttpStatus.OK).body(basicMovies);
     }
-
 
     // Get - Filtros
 
@@ -66,8 +62,6 @@ public class PeliculaController {
             @RequestParam(required = false) String dateCreation,
             @RequestParam(required = false) Set<Long> gender,
             @RequestParam(required = false, defaultValue = "ASC") String order)
-
-
     {
         List<PeliculaDTO> moviesListDto = this.peliculaService.getByFilters(title, image, dateCreation,gender,order);
 

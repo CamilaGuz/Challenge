@@ -19,7 +19,7 @@ import java.util.List;
 public class PersonajeSpecification {
 
     public Specification<PersonajeEntity> getByFilters(PersonajeFiltersDTO filtersDTO) {
-        return ((root, query, criteriaBuilder) -> {
+        return (root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
             //name
@@ -61,6 +61,6 @@ public class PersonajeSpecification {
             query.orderBy(criteriaBuilder.asc(root.get("name")));
 
             return criteriaBuilder.and(predicates.toArray(new javax.persistence.criteria.Predicate[0]));
-        });
+        };
     }
 }

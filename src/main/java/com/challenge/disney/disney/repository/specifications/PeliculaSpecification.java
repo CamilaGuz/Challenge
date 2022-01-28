@@ -1,3 +1,4 @@
+
 package com.challenge.disney.disney.repository.specifications;
 
 import com.challenge.disney.disney.dto.PeliculaFiltersDTO;
@@ -22,7 +23,7 @@ import java.util.List;
 public class PeliculaSpecification {
 
     public Specification<PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO){
-        return((root, query, criteriaBuilder) -> {
+        return(root, query, criteriaBuilder) -> {
 
             List<Predicate> predicates = new ArrayList<>();
             //title
@@ -30,21 +31,14 @@ public class PeliculaSpecification {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("title")),
-                               "%" + filtersDTO.getTitle().toLowerCase() + "%"
+                              "%" + filtersDTO.getTitle().toLowerCase() + "%"
+
                         )
                 );
             }
-            //gender
-            if (!CollectionUtils.isEmpty(filtersDTO.getGender())) {
-                Join<PeliculaEntity, GeneroEntity> join = root.join("gender", JoinType.INNER);
-                Expression<String> genderID = join.get("id");
-                predicates.add(genderID.in(filtersDTO.getGender()));
-
-            }
-            query.distinct(true);
 
             //image
-            if (StringUtils.hasLength(filtersDTO.getImage())); {
+            if (StringUtils.hasLength(filtersDTO.getImage())) {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("image")),
@@ -52,6 +46,7 @@ public class PeliculaSpecification {
                         )
                 );
             }
+
             //date
             if (StringUtils.hasLength(filtersDTO.getDateCreation())){
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -62,6 +57,16 @@ public class PeliculaSpecification {
                 );
             }
 
+            //gender
+            if (!CollectionUtils.isEmpty(filtersDTO.getGender())) {
+                Join<PeliculaEntity, GeneroEntity> join = root.join("gender", JoinType.INNER);
+                Expression<String> genderID = join.get("id");
+                predicates.add(genderID.in(filtersDTO.getGender()));
+
+            }
+
+            query.distinct(true);
+
             //order
             String orderByField = "title";
             query.orderBy(
@@ -69,12 +74,9 @@ public class PeliculaSpecification {
                             criteriaBuilder.asc(root.get(orderByField)) :
                             criteriaBuilder.desc(root.get(orderByField))
             );
-
-
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        });
 
-
+        };
 
     }
 }
