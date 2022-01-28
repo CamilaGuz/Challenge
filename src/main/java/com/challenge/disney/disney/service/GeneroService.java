@@ -4,5 +4,5 @@ import com.challenge.disney.disney.dto.GeneroDTO;
 
 public interface GeneroService {
 
-    GeneroDTO save(GeneroDTO genero);
+    GeneroDTO save(GeneroDTO gender);
 }

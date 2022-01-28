@@ -1,9 +1,7 @@
 package com.challenge.disney.disney.service.impl;
 
 import com.challenge.disney.disney.dto.GeneroDTO;
-import com.challenge.disney.disney.dto.PeliculaDTO;
 import com.challenge.disney.disney.entity.GeneroEntity;
-import com.challenge.disney.disney.entity.PeliculaEntity;
 import com.challenge.disney.disney.mapper.GeneroMapper;
 import com.challenge.disney.disney.repository.GeneroRepository;
 import com.challenge.disney.disney.service.GeneroService;
@@ -23,6 +21,8 @@ public class GeneroServiceImpl implements GeneroService {
         this.generoRepository = generoRepository;
     }
 
+
+    //Post
     @Override
     public GeneroDTO save(GeneroDTO gender) {
 

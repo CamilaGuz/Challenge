@@ -8,7 +8,6 @@ import com.challenge.disney.disney.entity.PeliculaEntity;
 import com.challenge.disney.disney.mapper.PeliculaMapper;
 import com.challenge.disney.disney.repository.GeneroRepository;
 import com.challenge.disney.disney.repository.PeliculaRepository;
-import com.challenge.disney.disney.repository.specifications.PersonajeSpecification;
 import com.challenge.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -32,83 +31,78 @@ public class PeliculaServiceImpl implements PeliculaService {
     private PeliculaSpecification peliculaSpecification;
 
 
-    public PeliculaServiceImpl(@Autowired @Lazy PeliculaMapper peliculaMapper, PeliculaRepository peliculaRepository, GeneroRepository generoRepository, PeliculaSpecification peliculaSpecification) {
+    public PeliculaServiceImpl(@Autowired @Lazy PeliculaMapper peliculaMapper, @Autowired @Lazy PeliculaRepository peliculaRepository, @Autowired @Lazy GeneroRepository generoRepository, @Autowired @Lazy PeliculaSpecification peliculaSpecification) {
         this.peliculaMapper = peliculaMapper;
         this.peliculaRepository = peliculaRepository;
         this.generoRepository = generoRepository;
         this.peliculaSpecification = peliculaSpecification;
     }
 
+    //Post
     @Override
-    public PeliculaDTO save(PeliculaDTO pelicula) {
+    public PeliculaDTO save(PeliculaDTO movie) {
 
-        GeneroEntity genderDetected =  generoRepository.getById(pelicula.getGenderId());
+        GeneroEntity genderDetected =  generoRepository.getById(movie.getGenderId());
 
-        PeliculaEntity peliculaEntity = peliculaMapper.peliculaDTO2Entity(pelicula, genderDetected);
+        PeliculaEntity peliculaEntity = peliculaMapper.peliculaDTO2Entity(movie, genderDetected);
         PeliculaEntity savedMovie = peliculaRepository.save(peliculaEntity);
         PeliculaDTO resultado = peliculaMapper.peliculaEntity2DTO(savedMovie, false);
 
         return resultado;
     }
 
-    public List<PeliculaDTO> getAllMovies(){
-        List<PeliculaEntity> entityList = peliculaRepository.findAll();
-        List<PeliculaDTO> resultado = peliculaMapper.peliculaEntityList2DtoList(entityList, false);
-        return resultado;
-    }
-
+    //delete
     @Override
     public void delete(Long id) {
+
         peliculaRepository.deleteById(id);
     }
-
+    //Put
     @Override
     public PeliculaDTO putMovie(Long id, PeliculaDTO edit) {
 
-        PeliculaEntity savedPelicula = this.peliculaEdit(id);
+        PeliculaEntity savedMovie = this.getpeliculaById(id);
 
-        savedPelicula.setImage(edit.getImage());
-        savedPelicula.setTitle(edit.getTitle());
-        savedPelicula.setDateCreation(peliculaMapper.String2LocalDate(edit.getDateCreation()));
-        savedPelicula.setQualification(edit.getQualification());
+        savedMovie.setImage(edit.getImage());
+        savedMovie.setTitle(edit.getTitle());
+        savedMovie.setDateCreation(peliculaMapper.String2LocalDate(edit.getDateCreation()));
+        savedMovie.setQualification(edit.getQualification());
 
-        PeliculaEntity editMovie = peliculaRepository.save(savedPelicula);
+        PeliculaEntity editMovie = peliculaRepository.save(savedMovie);
         PeliculaDTO  saveDTO = peliculaMapper.peliculaEntity2DTO(editMovie, false);
-
 
         return saveDTO;
     }
 
-    // trabajamos con la lista de BasciPeliculas
 
-    @Override
-    public List<PeliculaBasicDTO> getAllBasics() {
-
-       List<PeliculaEntity> peliculaEntities= peliculaRepository.findAll();
-       List<PeliculaBasicDTO> resultado =  peliculaMapper.peliculaBasicEntityList2DtoList(peliculaEntities);
-
-       return resultado;
-    }
-
-    private PeliculaEntity peliculaEdit(Long id) {
+    private PeliculaEntity getpeliculaById(Long id) {
 
         Optional<PeliculaEntity> peliculaEntity = peliculaRepository.findById(id);
         if (!peliculaEntity.isPresent()){
-
         }
         return peliculaEntity.get();
     }
 
-    // Peliculas por filtros
+    //filtros
 
-    public List<PeliculaDTO> getByFilters(String title, Set<Long> genres, String order){
+    public List<PeliculaDTO> getByFilters(String title, String image, String dateCreation, Set<Long> gender, String order){
 
-        PeliculaFiltersDTO filtersDTO = new PeliculaFiltersDTO(title, genres, order);
+        PeliculaFiltersDTO filtersDTO = new PeliculaFiltersDTO(title, image, dateCreation, gender, order);
 
-        List<PeliculaEntity> entities = this.peliculaRepository.findAll(this.peliculaSpecification.getByFilters(filtersDTO));peliculaSpecification.getByFilters(filtersDTO);
+        List<PeliculaEntity> entities = this.peliculaRepository.findAll(this.peliculaSpecification.getByFilters(filtersDTO));
         List<PeliculaDTO> dtos = this.peliculaMapper.peliculaEntityList2DtoList(entities, true);
 
         return dtos;
+    }
+
+    @Override
+    public List<PeliculaBasicDTO> getAllBasics() {
+
+        List<PeliculaEntity> peliculaEntities= peliculaRepository.findAll();
+        List<PeliculaBasicDTO> resultado =  peliculaMapper.peliculaBasicEntityList2DtoList(peliculaEntities);
+
+        return resultado;
+
     }
 
 

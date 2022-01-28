@@ -1,6 +1,6 @@
 package com.challenge.disney.disney.entity;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "movie")
+@Table (name = "movies")
 @Getter
 @Setter
 @SQLDelete( sql = "UPDATE  movies SET deleted = true WHERE id=?")
@@ -37,6 +37,7 @@ public class PeliculaEntity {
     private boolean deleted = Boolean.FALSE;
 
 
+    /*relacion con personajes*/
 
     @ManyToMany(
             cascade = {
@@ -53,6 +54,7 @@ public class PeliculaEntity {
     private List<PersonajeEntity> characters = new ArrayList<>();
 
 
+    /*relacion con genero*/
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private GeneroEntity gender;

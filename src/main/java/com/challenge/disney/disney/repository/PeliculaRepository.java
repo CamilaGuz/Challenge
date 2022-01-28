@@ -1,7 +1,6 @@
 package com.challenge.disney.disney.repository;
 
 import com.challenge.disney.disney.entity.PeliculaEntity;
-import com.challenge.disney.disney.entity.PersonajeEntity;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

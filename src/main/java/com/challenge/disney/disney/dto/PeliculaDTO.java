@@ -4,7 +4,6 @@ package com.challenge.disney.disney.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.util.List;
 
 @Getter
@@ -21,8 +20,9 @@ public class PeliculaDTO {
 
     private int qualification;
 
+    private Long genderId;
+
     private List<PersonajeDTO> movieCharacters;
 
-    @Column(name = "gender_id")
-    private Long genderId;
+
 }

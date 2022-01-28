@@ -1,6 +1,6 @@
 package com.challenge.disney.disney.entity;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -34,6 +34,7 @@ public class PersonajeEntity {
 
     private String history;
 
+    /*relacion con peliculas*/
     @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL, fetch  = FetchType.LAZY)
     private List<PeliculaEntity> movies = new ArrayList<>();
 

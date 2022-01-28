@@ -2,11 +2,8 @@ package com.challenge.disney.disney.mapper;
 
 import com.challenge.disney.disney.dto.PeliculaBasicDTO;
 import com.challenge.disney.disney.dto.PeliculaDTO;
-import com.challenge.disney.disney.dto.PersonajeBasicDTO;
-import com.challenge.disney.disney.dto.PersonajeDTO;
 import com.challenge.disney.disney.entity.GeneroEntity;
 import com.challenge.disney.disney.entity.PeliculaEntity;
-import com.challenge.disney.disney.entity.PersonajeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -22,18 +19,16 @@ public class PeliculaMapper {
     private PersonajeMapper personajeMapper;
 
     public PeliculaMapper(@Autowired @Lazy PersonajeMapper personajeMapper) {
+
         this.personajeMapper = personajeMapper;
     }
 
 
-
-
-    // dto a entity
+    // DTO a Entidad
 
     public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto, GeneroEntity generoEntity) {
 
         PeliculaEntity peliculaEntity = new PeliculaEntity();
-
 
         peliculaEntity.setTitle(dto.getTitle());
         peliculaEntity.setDateCreation(this.String2LocalDate(dto.getDateCreation()));
@@ -42,11 +37,10 @@ public class PeliculaMapper {
         peliculaEntity.setCharacters(personajeMapper.perosonajeEntityList(dto.getMovieCharacters()));
         peliculaEntity.setGender(generoEntity);
 
-
         return peliculaEntity;
     }
 
-    //Entity a dto
+    //Entidad a DTO
 
     public PeliculaDTO peliculaEntity2DTO(PeliculaEntity entity, boolean showCharacters){
 
@@ -63,7 +57,7 @@ public class PeliculaMapper {
         return dto;
     }
 
-    //guardar en lista de dto
+    //ListaEntity a ListaDto
 
     public List<PeliculaDTO> peliculaEntityList2DtoList(List<PeliculaEntity> listaEntity, boolean b){
         List<PeliculaDTO>dtoLista = new ArrayList<>();
@@ -74,7 +68,7 @@ public class PeliculaMapper {
     }
 
 
-    //parsear la fecha
+    //Fecha
 
     public LocalDate String2LocalDate(String stringDate) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -82,19 +76,15 @@ public class PeliculaMapper {
         return date;
     }
 
-    // Entity a dto de peliculas basicas
+    //atributos basicos
 
     public List<PeliculaBasicDTO> peliculaBasicEntityList2DtoList(List<PeliculaEntity> peliculaEntities) {
-
         List<PeliculaBasicDTO>dtoLista = new ArrayList<>();
         for(PeliculaEntity aux : peliculaEntities){
             dtoLista.add(this.peliculaBasicEntity2Dto(aux));
         }
         return dtoLista;
-
-
     }
-
     private PeliculaBasicDTO peliculaBasicEntity2Dto(PeliculaEntity aux) {
 
         PeliculaBasicDTO peliculaBasicDTO = new PeliculaBasicDTO();
@@ -105,7 +95,6 @@ public class PeliculaMapper {
 
         return peliculaBasicDTO;
     }
-
 }
 
 

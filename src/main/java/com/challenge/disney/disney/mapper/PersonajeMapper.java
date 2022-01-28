@@ -17,10 +17,11 @@ public class PersonajeMapper {
     private PeliculaMapper peliculaMapper;
 
     public PersonajeMapper(@Autowired @Lazy PeliculaMapper peliculaMapper) {
+
         this.peliculaMapper = peliculaMapper;
     }
 
-    //dto a entity
+    //DTO a Entidad
 
     public PersonajeEntity personajeDTO2Entity(PersonajeDTO dto){
 
@@ -35,7 +36,7 @@ public class PersonajeMapper {
         return personajeEntity;
     }
 
-    //entity a dto
+    //Entidad a DTO
 
     public PersonajeDTO personajeEntity2DTO(PersonajeEntity entity, boolean b) {
 
@@ -55,7 +56,7 @@ public class PersonajeMapper {
         return dto;
     }
 
-    //guardar en lista dto
+    //ListaEntiti a ListaDto
 
     public List<PersonajeDTO>personajeEntityList2DTOList(List<PersonajeEntity> listaEntity, boolean b) {
         List<PersonajeDTO> dtoList = new ArrayList<>();
@@ -64,6 +65,20 @@ public class PersonajeMapper {
 
         }
         return dtoList;
+    }
+
+    public List<PersonajeEntity> perosonajeEntityList(List<PersonajeDTO> movieCharacters) {
+
+        List<PersonajeEntity>personajeEntityLista = new ArrayList<>();
+
+        for(PersonajeDTO aux:  movieCharacters){
+            personajeEntityLista.add(this.personajeDTO2Entity(aux));
+        }
+
+        return personajeEntityLista;
+
+
+
     }
 
     //trabajamos con la lista de personajes basic
@@ -78,29 +93,16 @@ public class PersonajeMapper {
 
     }
 
-    private PersonajeBasicDTO personajeEntity2DtoBasic(PersonajeEntity aux) {
+   private PersonajeBasicDTO personajeEntity2DtoBasic(PersonajeEntity aux) {
 
         PersonajeBasicDTO personajeBasicDTO = new PersonajeBasicDTO();
 
         personajeBasicDTO.setImage(aux.getImage());
         personajeBasicDTO.setName(aux.getName());
 
-
         return  personajeBasicDTO;
     }
 
 
-    public List<PersonajeEntity> perosonajeEntityList(List<PersonajeDTO> peliculaPersonaje) {
 
-        List<PersonajeEntity>personajeEntityLista = new ArrayList<>();
-
-        for(PersonajeDTO aux: peliculaPersonaje){
-            personajeEntityLista.add(this.personajeDTO2Entity(aux));
-        }
-
-        return personajeEntityLista;
-
-
-
-    }
 }

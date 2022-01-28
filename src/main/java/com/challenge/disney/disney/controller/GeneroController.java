@@ -1,9 +1,7 @@
 package com.challenge.disney.disney.controller;
 
 import com.challenge.disney.disney.dto.GeneroDTO;
-import com.challenge.disney.disney.dto.PeliculaDTO;
 import com.challenge.disney.disney.service.GeneroService;
-import com.challenge.disney.disney.service.PeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -21,6 +19,7 @@ public class GeneroController {
     private GeneroService generoService;
 
     public GeneroController(@Autowired @Lazy GeneroService generoService) {
+
         this.generoService = generoService;
     }
 

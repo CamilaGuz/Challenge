@@ -10,15 +10,12 @@ public interface PersonajeService {
 
     PersonajeDTO save(PersonajeDTO dto);
 
-    List<PersonajeDTO> getAllCharacters();
-
     void delete(Long id);
 
     PersonajeDTO putCharacter(Long id, PersonajeDTO edit);
 
+
+    List<PersonajeDTO> getByFilters(String name, String image, Integer age, Set<Long> idMovie);
+
     List<PersonajeBasicDTO> getAllBasics();
-
-    PersonajeDTO getDetails(Long id);
-
-    List<PersonajeDTO> getByFilters(String name, Integer age, Set<Long> idMovie);
 }
