@@ -5,6 +5,7 @@ import com.challenge.disney.disney.dto.PeliculaDTO;
 import com.challenge.disney.disney.dto.PeliculaFiltersDTO;
 import com.challenge.disney.disney.entity.GeneroEntity;
 import com.challenge.disney.disney.entity.PeliculaEntity;
+import com.challenge.disney.disney.exception.ParamNotFound;
 import com.challenge.disney.disney.mapper.PeliculaMapper;
 import com.challenge.disney.disney.repository.GeneroRepository;
 import com.challenge.disney.disney.repository.PeliculaRepository;
@@ -42,9 +43,7 @@ public class PeliculaServiceImpl implements PeliculaService {
     @Override
     public PeliculaDTO save(PeliculaDTO movie) {
 
-        GeneroEntity genderDetected =  generoRepository.getById(movie.getGenderId());
-
-        PeliculaEntity peliculaEntity = peliculaMapper.peliculaDTO2Entity(movie, genderDetected);
+        PeliculaEntity peliculaEntity = peliculaMapper.peliculaDTO2Entity(movie);
         PeliculaEntity savedMovie = peliculaRepository.save(peliculaEntity);
         PeliculaDTO resultado = peliculaMapper.peliculaEntity2DTO(savedMovie, false);
 
@@ -77,6 +76,7 @@ public class PeliculaServiceImpl implements PeliculaService {
     private PeliculaEntity getpeliculaById(Long id) {
         Optional<PeliculaEntity> peliculaEntity = peliculaRepository.findById(id);
         if (!peliculaEntity.isPresent()){
+            throw new ParamNotFound("Id no valido");
         }
         return peliculaEntity.get();
     }
@@ -92,6 +92,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 
         return resultado;
     }
+    //basic
 
     @Override
     public List<PeliculaBasicDTO> getAllBasics() {

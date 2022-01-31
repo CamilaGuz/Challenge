@@ -35,7 +35,7 @@ public class PersonajeEntity {
     private String history;
 
     /*relacion con peliculas*/
-    @ManyToMany(mappedBy = "characters", cascade = CascadeType.ALL, fetch  = FetchType.LAZY)
+    @ManyToMany(mappedBy = "characters", fetch  = FetchType.LAZY)
     private List<PeliculaEntity> movies = new ArrayList<>();
 
 

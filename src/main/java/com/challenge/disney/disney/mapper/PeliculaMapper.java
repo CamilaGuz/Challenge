@@ -26,14 +26,16 @@ public class PeliculaMapper {
 
     // DTO a Entidad
 
-    public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto, GeneroEntity generoEntity) {
+    public PeliculaEntity peliculaDTO2Entity(PeliculaDTO dto) {
 
+        GeneroEntity generoEntity = new GeneroEntity();
         PeliculaEntity peliculaEntity = new PeliculaEntity();
 
         peliculaEntity.setTitle(dto.getTitle());
         peliculaEntity.setDateCreation(this.String2LocalDate(dto.getDateCreation()));
         peliculaEntity.setImage(dto.getImage());
         peliculaEntity.setQualification(dto.getQualification());
+        generoEntity.setId(dto.getGenderId());
         peliculaEntity.setCharacters(personajeMapper.perosonajeEntityList(dto.getMovieCharacters()));
         peliculaEntity.setGender(generoEntity);
 
@@ -51,8 +53,9 @@ public class PeliculaMapper {
         dto.setDateCreation(entity.getDateCreation().toString());
         dto.setImage(entity.getImage());
         dto.setQualification(entity.getQualification());
-        dto.setMovieCharacters(personajeMapper.personajeEntityList2DTOList(entity.getCharacters(), false));
         dto.setGenderId(entity.getGender().getId());
+        dto.setMovieCharacters(personajeMapper.personajeEntityList2DTOList(entity.getCharacters(), false));
+
 
         return dto;
     }

@@ -11,7 +11,6 @@ public class GeneroMapper {
     public GeneroEntity generoDTO2Entity(GeneroDTO gender) {
 
         GeneroEntity generoEntity = new GeneroEntity();
-
         generoEntity.setImage(gender.getImage());
         generoEntity.setName(gender.getName());
 

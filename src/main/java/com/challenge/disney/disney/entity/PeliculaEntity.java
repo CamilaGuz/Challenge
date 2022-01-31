@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "movies")
+@Table (name = "movie")
 @Getter
 @Setter
-@SQLDelete( sql = "UPDATE  movies SET deleted = true WHERE id=?")
+@SQLDelete( sql = "UPDATE  movie SET deleted = true WHERE id=?")
 @Where( clause = "deleted=false")
 public class PeliculaEntity {
 
@@ -56,7 +56,7 @@ public class PeliculaEntity {
 
     /*relacion con genero*/
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private GeneroEntity gender;
 
 

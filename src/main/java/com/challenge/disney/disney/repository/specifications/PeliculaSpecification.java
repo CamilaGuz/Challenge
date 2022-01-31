@@ -23,16 +23,15 @@ import java.util.List;
 public class PeliculaSpecification {
 
     public Specification<PeliculaEntity> getByFilters(PeliculaFiltersDTO filtersDTO){
-        return(root, query, criteriaBuilder) -> {
-
+        return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
+
             //title
-            if (StringUtils.hasLength(filtersDTO.getTitle())); {
+            if (StringUtils.hasLength(filtersDTO.getTitle())) {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("title")),
-                              "%" + filtersDTO.getTitle().toLowerCase() + "%"
-
+                                "%" + filtersDTO.getTitle().toLowerCase() + "%"
                         )
                 );
             }
@@ -60,9 +59,8 @@ public class PeliculaSpecification {
             //gender
             if (!CollectionUtils.isEmpty(filtersDTO.getGender())) {
                 Join<PeliculaEntity, GeneroEntity> join = root.join("gender", JoinType.INNER);
-                Expression<String> genderID = join.get("id");
-                predicates.add(genderID.in(filtersDTO.getGender()));
-
+                Expression<String> generoId = join.get("id");
+                predicates.add(generoId.in(filtersDTO.getGender()));
             }
 
             query.distinct(true);

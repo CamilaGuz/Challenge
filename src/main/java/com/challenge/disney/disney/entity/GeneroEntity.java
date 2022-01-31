@@ -22,7 +22,7 @@ public class GeneroEntity {
 
     private String image;
 
-    //private List<PeliculaEntity> genders = new ArrayList<>();
+
 
 
 

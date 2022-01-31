@@ -33,7 +33,7 @@ public class PersonajeController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         this.personajeService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -58,7 +58,7 @@ public class PersonajeController {
         return ResponseEntity.status(HttpStatus.OK).body(basicsCharacters);
     }
 
-    //Get - filtros
+    //Get para todos los atributos y con filtros
     @GetMapping
     public ResponseEntity<List<PersonajeDTO>> getDetailsByFilters (
       @RequestParam(required = false) String name,

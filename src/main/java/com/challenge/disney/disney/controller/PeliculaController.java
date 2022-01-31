@@ -32,7 +32,7 @@ public class PeliculaController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void>delete(@PathVariable Long id){
         this.peliculaService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -53,7 +53,7 @@ public class PeliculaController {
         return ResponseEntity.status(HttpStatus.OK).body(basicMovies);
     }
 
-    // Get - Filtros
+    // Get para todos los atributos y con Filtros
 
     @GetMapping
     public ResponseEntity<List<PeliculaDTO>> getDetailsByFilters(
