@@ -32,6 +32,20 @@ public class PersonajeSpecification {
 
                 );
             }
+            //age
+            if (filtersDTO.getAge() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(root.get("age"), filtersDTO.getAge()));
+
+            }
+            //movies
+            if (!CollectionUtils.isEmpty(filtersDTO.getIdmovie())) {
+                Join<PersonajeEntity, PeliculaEntity> join = root.join("movies", JoinType.INNER);
+                Expression<String> moviesIDS = join.get("id");
+                predicates.add(moviesIDS.in(filtersDTO.getIdmovie()));
+
+            }
+
             //image
             if (StringUtils.hasLength(filtersDTO.getImage())) {
                 predicates.add(
@@ -43,22 +57,8 @@ public class PersonajeSpecification {
                 );
             }
 
-            //age
-            if (filtersDTO.getAge() != null) {
-                predicates.add(
-                        criteriaBuilder.equal(root.get("age"), filtersDTO.getAge()));
 
-            }
-            //movies
-            if (!CollectionUtils.isEmpty(filtersDTO.getIdmovie())) {
-                Join<PeliculaEntity, PersonajeEntity> join = root.join("movies", JoinType.INNER);
-                Expression<String> moviesIDS = join.get("id");
-                predicates.add(moviesIDS.in(filtersDTO.getIdmovie()));
 
-            }
-            //remover dupiclados
-            query.distinct(true);
-            query.orderBy(criteriaBuilder.asc(root.get("name")));
 
             return criteriaBuilder.and(predicates.toArray(new javax.persistence.criteria.Predicate[0]));
         };

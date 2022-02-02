@@ -47,7 +47,7 @@ public class PeliculaController {
     }
 
     //Get para traer una LISTA de imagen, titulo y fecha de creacion
-    @GetMapping("/movies")
+    @GetMapping("/all")
     public  ResponseEntity<List<PeliculaBasicDTO>> getAllBasic(){
         List<PeliculaBasicDTO> basicMovies = peliculaService.getAllBasics();
         return ResponseEntity.status(HttpStatus.OK).body(basicMovies);

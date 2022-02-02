@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "3bbdd491-28bc-494a-8fdf-0c1f5073a4e2",
+		"name": "ChallengeDiney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Controller",
+			"item": [
+				{
+					"name": "Personaje",
+					"item": [
+						{
+							"name": "personaje",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFndXo1NEBnbWFpbC5jb20iLCJleHAiOjE2NDM2NzEzMTksImlhdCI6MTY0MzYzNTMxOX0.npML_2LFfe01v2MGEI9lYTcPLcspLQLSpBy3p3uQS9w",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image\": \"jpg\",\r\n    \"name\": \"dory\",\r\n    \"age\": \"10\",\r\n    \"weight\": \"1\",\r\n    \"history\": \"amiga\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/characters",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"characters"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "personaje",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFndXo1NEBnbWFpbC5jb20iLCJleHAiOjE2NDM2NzI5NTMsImlhdCI6MTY0MzYzNjk1M30.I1VAOwxykTLnNpk2XyYMdF-apxaPlSK6BjjiovUKlro",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/characters/delete/8",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"characters",
+										"delete",
+										"8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "por id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\r\n        \"image\": \"jpg\",\r\n        \"name\": \"batman\",\r\n        \"age\": 65,\r\n        \"weight\": 80.0,\r\n        \"history\": \"kgndjigk\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/characters/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"characters",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "por filtros",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGEtZ3V6bWFuQG91dGxvb2suZXMiLCJleHAiOjE2NDM4NDQ1NTAsImlhdCI6MTY0MzgwODU1MH0.4occsagJSoKWv9fvyZkA1PeumTsV2S_u7MJPwgviJyM",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/characters",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"characters"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "image",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "age",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "ariel",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lista imagen y nombre",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFfMTNndXpAaG90bWFpbC5jb20iLCJleHAiOjE2NDM0Mjc2MTEsImlhdCI6MTY0MzM5MTYxMX0.jbUCPdu7i7ZA3oSJx-taVZROfh0-cFSiojdSrwvXYIo",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/characters/characters",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"characters",
+										"characters"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Pelicula",
+					"item": [
+						{
+							"name": "pelicula",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGEtZ3V6bWFuQG91dGxvb2suZXMiLCJleHAiOjE2NDM4NDE1OTIsImlhdCI6MTY0MzgwNTU5Mn0.4Os_6ZMaU1jzVTwNJ1hyWnHOEvLwokAGAUY3Q-AN7Z0",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image\": \"jpge\",\r\n    \"title\": \"marvel\",\r\n    \"dateCreation\": \"2021-11-11\",\r\n    \"qualification\": 9,\r\n    \"genderId\": 3,\r\n    \"movieCharacters\": [\r\n        {\r\n            \"image\": \"jpg\",\r\n            \"name\": \"thor\",\r\n            \"age\": 10,\r\n            \"weight\": 1.0,\r\n            \"history\": \"amiga\"\r\n        },\r\n        {\r\n            \"image\": \"jpg\",\r\n            \"name\": \"capitan america\",\r\n            \"age\": 8,\r\n            \"weight\": 1.0,\r\n            \"history\": \"amiga\"\r\n        }\r\n    \r\n    ]\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/movies",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "peliculas",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFfMTNndXpAaG90bWFpbC5jb20iLCJleHAiOjE2NDM0Mjc2MTEsImlhdCI6MTY0MzM5MTYxMX0.jbUCPdu7i7ZA3oSJx-taVZROfh0-cFSiojdSrwvXYIo",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/movies/delete/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"delete",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lista img, nombre y fecha",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFndXo1NEBnbWFpbC5jb20iLCJleHAiOjE2NDM0ODg5NTIsImlhdCI6MTY0MzQ1Mjk1Mn0.ZQ1q82Wc4rTX2kl7wSWFOamg7e9QsGqVudAhN4koZOw",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/movies/all",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "por id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGEtZ3V6bWFuQG91dGxvb2suZXMiLCJleHAiOjE2NDM4NDE1OTIsImlhdCI6MTY0MzgwNTU5Mn0.4Os_6ZMaU1jzVTwNJ1hyWnHOEvLwokAGAUY3Q-AN7Z0",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image\": \"jpge\",\r\n    \"title\": \"buscando a nemo\",\r\n    \"dateCreation\": \"2003-11-11\",\r\n    \"qualification\": 9,\r\n    \"genderId\": 2,\r\n    \"movieCharacters\": [\r\n        {\r\n            \"image\": \"jpg\",\r\n            \"name\": \"dory\",\r\n            \"age\": 3,\r\n            \"weight\": 1.0,\r\n            \"history\": \"amiga\"\r\n        }\r\n    ]\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/movies/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies",
+										"7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "por filtros",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGFndXo1NEBnbWFpbC5jb20iLCJleHAiOjE2NDM2NzEzMTksImlhdCI6MTY0MzYzNTMxOX0.npML_2LFfe01v2MGEI9lYTcPLcspLQLSpBy3p3uQS9w",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/movies",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"movies"
+									],
+									"query": [
+										{
+											"key": "title",
+											"value": "frozen",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "DESC",
+											"disabled": true
+										},
+										{
+											"key": "dateCreation",
+											"value": "2020-11-11",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Genero",
+					"item": [
+						{
+							"name": "genero",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGEtZ3V6bWFuQG91dGxvb2suZXMiLCJleHAiOjE2NDM4NDE1OTIsImlhdCI6MTY0MzgwNTU5Mn0.4Os_6ZMaU1jzVTwNJ1hyWnHOEvLwokAGAUY3Q-AN7Z0",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"image\": \"jpge\",\r\n    \"name\"   : \"familiar\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/genders",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"genders"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"camilaguz54@gmail.com\",\r\n    \"password\": \"programacion122\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjYW1pbGEtZ3V6bWFuQG91dGxvb2suZXMiLCJleHAiOjE2NDM4NDE1OTIsImlhdCI6MTY0MzgwNTU5Mn0.4Os_6ZMaU1jzVTwNJ1hyWnHOEvLwokAGAUY3Q-AN7Z0",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"camila-guzman@outlook.es\",\r\n    \"password\": \"programacion122\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

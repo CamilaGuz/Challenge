@@ -50,7 +50,7 @@ public class PersonajeController {
 
     //Get para obtener una LISTA de imagen y nombre de los personajes
 
-    @GetMapping("/characters")
+    @GetMapping("/all")
     public ResponseEntity<List<PersonajeBasicDTO>> getAllBasic() {
 
         List<PersonajeBasicDTO> basicsCharacters = personajeService.getAllBasics();

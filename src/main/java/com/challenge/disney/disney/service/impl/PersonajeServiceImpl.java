@@ -71,7 +71,6 @@ public class PersonajeServiceImpl implements PersonajeService {
         return personajeEntity.get();
     }
 
-    //Get para obtener una LISTA de imagen y nombre de los personajes
     @Override
     public List<PersonajeBasicDTO> getAllBasics() {
 

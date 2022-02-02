@@ -56,7 +56,6 @@ public class PersonajeMapper {
         return dto;
     }
 
-    //ListaEntiti a ListaDto
 
     public List<PersonajeDTO>personajeEntityList2DTOList(List<PersonajeEntity> listaEntity, boolean b) {
         List<PersonajeDTO> dtoList = new ArrayList<>();
